@@ -5,8 +5,11 @@ defmodule BooksWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/api", BooksWeb do
+  scope "/api" do
     pipe_through :api
+
+    forward "/graphql", Absinthe.Plug, schema: BooksWeb.Schema
+    forward "/graphiql", Absinthe.Plug.GraphiQL, schema: BooksWeb.Schema
   end
 
   # Enables LiveDashboard only for development
