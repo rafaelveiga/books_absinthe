@@ -12,4 +12,12 @@ defmodule BooksWeb.Schema.Types.Root do
       resolve &BookResolver.get/2
     end
   end
+
+  object :root_mutation do
+    field :create_book, type: :book do
+      arg :input, non_null(:create_book_input)
+
+      resolve &BookResolver.create/2
+    end
+  end
 end
